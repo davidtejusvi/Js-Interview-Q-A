@@ -1,0 +1,24 @@
+var majorityElement = function (nums) {
+    let hashMap = {}
+    let max = 0
+    let maxnum = []
+    for (let num of nums) {
+        if (hashMap[num]) {
+            hashMap[num]++
+        } else {
+            hashMap[num] = 1
+        }
+
+        if (hashMap[num] > max) {
+            max = hashMap[num];
+        }
+    }
+
+    for (const num in hashMap) {
+        if (hashMap[num] === max) {
+            maxnum.push(parseInt(num));
+        }
+    }
+
+    return maxnum
+};
