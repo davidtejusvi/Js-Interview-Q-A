@@ -1,0 +1,29 @@
+function createGraph() {
+    return {};
+}
+
+function addEdge(graph, v1, v2) {
+    if (!graph[v1]) graph[v1] = [];
+    if (!graph[v2]) graph[v2] = [];
+    graph[v1].push(v2)
+    return graph;
+}
+
+function to2DArray(graph) {
+    return Object.keys(graph).map(vertex => [vertex, ...graph[vertex]])
+}
+
+let graph = createGraph();
+graph = addEdge(graph, 'A', 'B');
+graph = addEdge(graph, 'A', 'C');
+graph = addEdge(graph, 'B', 'D');
+graph = addEdge(graph, 'C', 'E');
+graph = addEdge(graph, 'D', 'E');
+graph = addEdge(graph, 'E', 'A');
+
+console.log("Adjacency List");
+for (let vertex in graph) {
+    console.log(`${vertex} ->${graph[vertex].join(', ')}`)
+}
+
+console.log("2D Array:", to2DArray(graph));
