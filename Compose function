@@ -1,0 +1,20 @@
+function AddFive(a) {
+    return a + 5;
+}
+
+function subtractTwo(a) {
+    return a - 2;
+}
+
+function multiplyFour(a) {
+    return a * 4
+}
+
+const compose = (...functions) => {
+    return (args) => {
+        functions.reduceRight((arg, fn) => fn(arg), args)
+    }
+}
+
+const evaluate = compose(AddFive, subtractTwo, multiplyFour);
+console.log(evaluate(5)) // mul = 5*4 = 20, sub = 20-2=18, add = 18+5=23. //answer is 23
