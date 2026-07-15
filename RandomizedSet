@@ -1,0 +1,41 @@
+var RandomizedSet = function () {
+    this.map = new Map();  // Stores the value and its index in the array
+    this.arr = [];  // Array to store the values
+};
+
+
+RandomizedSet.prototype.insert = function (val) {
+    if (this.map.has(val)) {
+        return false;  // Value already exists
+    }
+    this.map.set(val, this.arr.length);  // Store value and its index in the array
+    this.arr.push(val);  // Add value to the array
+    return true;
+};
+
+
+RandomizedSet.prototype.remove = function (val) {
+    if (!this.map.has(val)) {
+        return false;  // Value doesn't exist
+    }
+    const idx = this.map.get(val);  // Get the index of the value in the array
+    const lastVal = this.arr[this.arr.length - 1];  // Get the last element in the array
+
+    // Swap the value with the last element
+    this.arr[idx] = lastVal;
+    this.map.set(lastVal, idx);  // Update the index of the last element
+
+    // Remove the last element
+    this.arr.pop();
+    this.map.delete(val);  // Remove the value from the map
+
+    return true;
+};
+
+
+RandomizedSet.prototype.getRandom = function () {
+    const randomIdx = Math.floor(Math.random() * this.arr.length);  // Generate a random index
+    return this.arr[randomIdx];  // Return the element at that random index
+};
+
+console.log(RandomizedSet(["RandomizedSet", "insert", "remove", "insert", "getRandom", "remove", "insert", "getRandom"]));
