@@ -1,0 +1,37 @@
+/* Given a list of points, find out if any four of them form a square. Return 'true' if possible, else 'false'. */
+
+
+const validSquare = (p1, p2, p3, p4) => {
+    //caliculate distance between two points
+    function distance(x, y) {
+        let [xA, xB] = x;
+        let [yA, yB] = y;
+        return (xA - yA) ** 2 + (xB - yB) ** 2;
+    }
+    //create set with distance between all pairs of points
+    let set = new Set([
+        distance(p1, p2),
+        distance(p1, p3),
+        distance(p1, p4),
+        distance(p2, p3),
+        distance(p2, p4),
+        distance(p3, p4),
+    ])
+    //check if set doestn contain 0 & has only 2 square of distnace
+    return !set.has(0) && set.size === 2;
+}
+let p1 = [0, 0], p2 = [1, 1], p3 = [1, 0], p4 = [0, 1];
+console.log(validSquare(p1, p2, p3, p4))
+
+// Example 1:
+
+// Input: p1 = [0,0], p2 = [1,1], p3 = [1,0], p4 = [0,1]
+// Output: true
+// Example 2:
+
+// Input: p1 = [0,0], p2 = [1,1], p3 = [1,0], p4 = [0,12]
+// Output: false
+// Example 3:
+
+// Input: p1 = [1,0], p2 = [-1,0], p3 = [0,1], p4 = [0,-1]
+// Output: true
