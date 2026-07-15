@@ -1,0 +1,30 @@
+import React, { useEffect, useState } from 'react'
+///debouncing hook
+const useDebouncing = (inputValue, delay = 1000) => {
+    const [debouncedValue, setDebouncedValue] = useState(inputValue);
+    useEffect(() => {
+        const timer = setTimeout(() => setDebouncedValue(inputValue), delay);
+        return () => {
+            clearTimeout(timer)
+        }
+    }, [inputValue, delay]);
+    return debouncedValue
+}
+
+
+
+
+const DEbouncingQ = () => {
+    const [name, setName] = useState('')
+    const debouncedValue = useDebouncing()
+    useEffect(() => {
+        console.log("debouncedValue", debouncedValue)
+    }, [debouncedValue])
+    return (
+        <div>
+            <input name='name' value={name} onChange={(e) => setName(e.target.value)} />
+        </div>
+    )
+}
+
+export default DEbouncingQ
