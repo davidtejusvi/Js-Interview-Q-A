@@ -1,0 +1,27 @@
+
+const smallerNumbersthanCuurent = (nums)=>{
+    let ans = [];
+    let i =0;
+
+    while (i < nums.length){
+        let count  = 0;
+        for(let num of nums){
+            if(nums[i]>num){
+                count +=1;
+            }
+        }
+        ans.push(count);
+        i++;
+    }
+    return ans;
+}
+
+console.log(smallerNumbersthanCuurent([8,1,2,2,3]));
+console.log(smallerNumbersthanCuurent([6,5,4,8]));
+console.log(smallerNumbersthanCuurent([7,7,7,7]));
+
+/* o/p
+*   [ 4, 0, 1, 1, 3 ]
+    [ 2, 1, 0, 3 ]
+    [ 0, 0, 0, 0 ]
+* */
