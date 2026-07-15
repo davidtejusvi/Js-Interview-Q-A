@@ -1,0 +1,12 @@
+const productOfArrExceptSelf = (nums) => {
+    let result = [];
+    for (let i = 0; i < nums.length; i++) {
+        const filteredArr = nums.filter((num, index) => index !== i);
+        const product = filteredArr.reduce((acc, val) => acc * val, 1);
+        result.push(product)
+    }
+    return result;
+}
+
+console.log(productOfArrExceptSelf([1, 2, 3, 4])) //[24,12,8,6]
+console.log(productOfArrExceptSelf([[-1, 1, 0, -3, 3]])) //[0,0,9,0,0]
