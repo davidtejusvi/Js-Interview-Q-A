@@ -1,0 +1,10 @@
+const convertSortedArrToBinary = (nums) => {
+    if (left > right) return null;
+
+    const mid = Math.floor((left + right) / 2);
+    const node = new TreeNode(nums[mid]);
+
+    const left = convertSortedArrToBinary(nums, left, mid - 1);
+    const right = convertSortedArrToBinary(nums, mid + 1, right);
+    return node
+}
