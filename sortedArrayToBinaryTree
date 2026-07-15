@@ -1,0 +1,10 @@
+const sortedArrayToBinaryTree = (nums,left=0,right = nums.length-1) => {
+    if(left > right) return null;
+    const mid = Math.floor((left + right)/2);
+    const node = new TreeNode(nums[min]);
+    node.left = sortedArrayToBinaryTree(nums,left,mid-1);
+    node.right = sortedArrayToBinaryTree(nums,mid+1,right);
+    return node;
+}
+
+console.log(sortedArrayToBinaryTree([-10,-3,0,5,9]))
