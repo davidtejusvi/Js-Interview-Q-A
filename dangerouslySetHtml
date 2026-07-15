@@ -1,0 +1,12 @@
+
+import React from "react";
+//dangerously set html 
+//** 
+const data = "<h1 style=color: blue> Some content use to avoid xss attack</h1> "
+
+export default function App() {
+
+    return <div dangerouslySetInnerHTML={{ __html: data }}> {data}</div >
+}
+
+
