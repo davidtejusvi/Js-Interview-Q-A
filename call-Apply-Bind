@@ -1,0 +1,20 @@
+const person = {
+    name: "aviyah",
+    hello: function (ele) {
+        console.log(hi + this.name + ele)
+    }
+}
+
+//call
+const newPerson = {
+    name: "dave"
+}
+
+person.hello.call(newPerson, "welcome")
+
+//Apply
+
+person.hello.apply(newPerson, ["welcome", "home"])
+
+//bind
+const anotherPerson = person.hello.bind(newPerson);
