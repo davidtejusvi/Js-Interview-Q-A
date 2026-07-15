@@ -1,0 +1,16 @@
+const findClosestNumberToZero = (arr) => {
+    let minDistance = arr[0];
+    for (let i = 0; i < arr.length; i++) {
+        let distanceFromNo = Math.abs(arr[i]);
+        let mindis = Math.abs(minDistance);
+        if (distanceFromNo < mindis) {
+            minDistance = arr[i];
+        } else if (distanceFromNo === mindis) {
+            minDistance = arr[i] > minDistance ? arr[i] : minDistance
+        }
+    }
+    return minDistance;
+}
+
+console.log(findClosestNumberToZero([-4, -2, 1, 4, 8]))  //o/p:1 
+console.log(findClosestNumberToZero([2, -1, 1])) //o/p:1 
