@@ -1,0 +1,60 @@
+import React, { useEffect, useState, useCallback } from 'react';
+
+// Debouncing hook
+const useDebouncing = (inputValue, delay = 1000) => {
+    const [debouncedValue, setDebouncedValue] = useState(inputValue);
+    useEffect(() => {
+        const timer = setTimeout(() => setDebouncedValue(inputValue), delay);
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [inputValue, delay]);
+    return debouncedValue;
+};
+
+// Throttling hook
+const useThrottle = (value, limit = 500) => {
+    const [throttledValue, setThrottledValue] = useState(value);
+    const lastRan = useRef(Date.now());
+
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            if (Date.now() - lastRan.current >= limit) {
+                setThrottledValue(value);
+                lastRan.current = Date.now();
+            }
+        }, limit - (Date.now() - lastRan.current));
+
+        return () => {
+            clearTimeout(handler);
+        };
+    }, [value, limit]);
+
+    return throttledValue;
+};
+
+const DebouncingQ = () => {
+    const [name, setName] = useState('');
+    const debouncedValue = useDebouncing(name); // Fixed: Added name as parameter
+
+    // Memoized change handler
+    const handleChange = useCallback((e) => {
+        setName(e.target.value);
+    }, []);
+
+    useEffect(() => {
+        console.log("debouncedValue", debouncedValue);
+    }, [debouncedValue]);
+
+    return (
+        <div>
+            <input
+                name='name'
+                value={name}
+                onChange={handleChange}
+            />
+        </div>
+    );
+};
+
+export default DebouncingQ;
