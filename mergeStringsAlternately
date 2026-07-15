@@ -1,0 +1,15 @@
+const mergeStringsAlternately = (word1, word2) => {
+    let maxLength = Math.max(word1.length, word2.length);
+    let res = [];
+    for (let i = 0; i < maxLength; i++) {
+        res.push(word1[i]);
+        res.push(word2[i])
+    }
+    return res.join("")
+}
+
+console.log(mergeStringsAlternately("abc", "pqr"));  //o/p :- "apbqcr"
+
+console.log(mergeStringsAlternately("ab", "pqrs"));  //o/p :- "apbqrs"
+
+console.log(mergeStringsAlternately("abcd", "pq"));  //o/p :- "apbqcd"
