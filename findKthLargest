@@ -1,0 +1,33 @@
+// var findKthLargest = function (nums, k) {
+//     nums.sort((a, b) => b - a);
+//     return nums[k - 1]
+// };
+// console.log(findKthLargest([3, 2, 1, 5, 6, 4], 2))  //o/p:- 5
+// console.log(findKthLargest([3, 2, 3, 1, 2, 4, 5, 5, 6], 4))  //o/p:- 4
+
+//withour sorting method
+
+const findKthLargest = (nums, k) => {
+    let largest = -Infinity;
+    const hashMap = {};   // construct a hash map of difference between nums[i] and largest
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] > largest) {
+            largest = nums[i] // find the largest element
+        }
+    }
+
+    for (let i = 0; i < nums.length; i++) {
+        const diff = largest - nums[i];
+        hashMap[diff] = (hashMap[diff] || 0) + 1;
+    }
+    let count = 0;    // find kth largest number
+    let diff = 0;
+    while (count < k) {
+        count += (hashMap[diff] || 0);
+        diff++
+    }
+    return largest - diff + 1;
+}
+
+console.log(findKthLargest([3, 2, 1, 5, 6, 4], 2))  //o/p:- 5
+console.log(findKthLargest([3, 2, 3, 1, 2, 4, 5, 5, 6], 4))  //o/p:- 4
