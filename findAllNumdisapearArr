@@ -1,0 +1,20 @@
+let arr = [4,2,5,7,8,9];
+
+let n=10;
+
+const findAllNumdisapearArr = (arr,n) => {
+        let hashMap = {};
+        let missing = [];
+        for(let ele of arr){
+           hashMap[ele]=ele;
+        }
+
+        for(let i=0;i<=n;i++){
+            if(hashMap[i]=== undefined){
+                missing.push(i);
+            }
+        }
+        return missing;
+}
+
+console.log(findAllNumdisapearArr(arr,n));
