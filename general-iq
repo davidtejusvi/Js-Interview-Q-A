@@ -1,0 +1,104 @@
+foo();
+bar();
+
+function foo() {
+    console.log("function foo")
+}
+
+const bar = () => {
+    console.log("function bar")
+}
+// it will through error bar cannot be hoisted so it cannot called before initialization
+//foo() can be hoisted on compiling time 
+
+/////////
+//yeild or generator function - convert function into generator function
+
+function getMultipleValue() {
+    return 10;
+    return 20;
+}
+
+function* getMultipleValue() {
+    yield 10;
+    yield 20;
+}
+const res = getMultipleValue();
+console.log(res.next().value) // print 10 value
+console.log(res.next().value) // print 20 value
+
+//////
+const person = {
+    name: "daisy",
+    age: 9
+}
+
+// o/p- [[name,"daisy"],[age,9]];
+
+//solution -1
+const res1 = person.Object.entries(person);
+
+//solution -2
+const result = [];
+for (let key in person) {
+    result.push([key, person[key]]);
+}
+
+console.log(result);
+
+//solution -3
+const keys = Object.keys(person);
+const result1 = [];
+
+for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    result.push([key, person[key]]);
+}
+
+console.log(result);
+
+/////// callback hell
+getData(function (a) {
+    getMoreData(a, function (b) {
+        getEvenMoreData(b, function (c) {
+            getFinalData(c, function (d) {
+                console.log('Final result: ' + d);
+            });
+        });
+    });
+});
+
+// Poor readability - The code becomes hard to follow as it grows horizontally
+
+// Difficult error handling - Each callback needs its own error handling
+
+// Hard to maintain - Making changes becomes risky due to complex nesting
+
+// Debugging challenges - Stack traces become less helpful
+
+//Example Using Promises
+getData()
+    .then(a => getMoreData(a))
+    .then(b => getEvenMoreData(b))
+    .then(c => getFinalData(c))
+    .then(d => console.log('Final result: ' + d))
+    .catch(error => console.error(error));
+
+//Example Using Async/Await javascript
+async function processData() {
+    try {
+        const a = await getData();
+        const b = await getMoreData(a);
+        const c = await getEvenMoreData(b);
+        const d = await getFinalData(c);
+        console.log('Final result: ' + d);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+
+
+
+
