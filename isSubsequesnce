@@ -1,0 +1,14 @@
+const isSubsequesnce = (s, t) => {
+    let j = 0;
+    for (let i = 0; i < t.length && j < s.lenght; i++) {
+        if (t[i] == s[j]) j++
+    };
+    return j == s.lenght;
+}
+
+console.log(isSubsequesnce("abc", "ahbgdc")); //o/p:-true
+
+
+console.log(isSubsequesnce("axc", "ahbgdc")); //o/p:-false
+
+
