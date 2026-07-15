@@ -1,0 +1,69 @@
+import React, { useEffect, useState } from 'react'
+
+const PaginationQ = () => {
+    const [todos, setTodo] = useState([]);
+    const [todosPerPage, setTodosPerPage] = useState(10);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    //number of total pages
+    const numOfTotalPages = Math.ceil(todos.length / todosPerPage);
+
+    //making an array with num o total pages
+    const pages = [...Array(numOfTotalPages + 1).keys()].slice(1);
+
+    //last todos
+    const indexOfLastTodos = currentPage * todosPerPage; // 1*10=10
+
+    //First todos
+    const indexOFirstTodos = indexOfLastTodos - todosPerPage; //30-10=20
+
+    const visibleTodos = todos.slice(indexOFirstTodos, indexOfLastTodos);
+
+    const prevHandler = () => {
+        if (currentPage !== 1) setCurrentPage(currentPage - 1)
+    }
+
+    const nextHandler = () => {
+        if (currentPage !== numOfTotalPages) setCurrentPage(currentPage + 1)
+    }
+
+    useEffect(() => {
+        axios.get("https://jsonplaceholder.typecode.com/todos")
+            .then(res => setTodo(res.data))
+    }, [])
+
+    return (
+        <>
+            <div>
+                <h1>drop down</h1>
+                <select onChange={(e) => setTodosPerPage(e.target.value)}>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                </select>
+            </div>
+            <div>
+                {
+                    visibleTodos.map((todo) => {
+                        <p key={todo.id}>{todo.title}</p>
+                    })
+                }
+                <span onClick={prevHandler}>prev</span>
+                <p>
+                    {
+                        pages.map((page) => (
+                            <span
+                                key={page}
+                                onClick={() => setCurrentPage(page)}
+                                className={`${currentPage === page ? "active" : ""}`}
+                            >{'${page} |'}</span>
+                        ))
+                    }
+                </p>
+                <span onClick={nextHandler}>Next</span>
+            </div>
+        </>
+    )
+}
+
+export default PaginationQ
